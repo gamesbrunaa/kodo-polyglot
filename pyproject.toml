@@ -1,0 +1,69 @@
+# ===========================
+# Project Info
+# ===========================
+[project]
+name = "python-fastapi-template"
+version = "1.0.0"
+description = "Personal template for Python FastAPI projects"
+requires-python = ">=3.10"
+
+# ===========================
+# Production Dependencies
+# (the project needs these to run)
+# ===========================
+dependencies = [
+    "sqlalchemy",
+    "pymysql",
+    "python-dotenv",
+    "cryptography",
+    "fastapi",
+    "uvicorn",
+]
+
+# ===========================
+# Development Dependencies
+# (tools that help US while coding)
+# ===========================
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest",
+    "pytest-cov",
+    "mypy",
+]
+
+# ===========================
+# Ruff - Linting
+# ===========================
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors (syntax and style)
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes (unused imports, variables)
+    "I",    # isort (import ordering)
+    "N",    # pep8-naming (naming conventions)
+    "UP",   # pyupgrade (modernize syntax)
+]
+
+[tool.ruff.format]
+quote-style = "double"
+
+# ===========================
+# Pytest - Testing
+# ===========================
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+# ===========================
+# MyPy - Type Checking
+# ===========================
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
