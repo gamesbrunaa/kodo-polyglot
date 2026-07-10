@@ -1,6 +1,7 @@
-from app.core.settings import Settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
+
+from app.core.settings import Settings
 
 settings = Settings()
 

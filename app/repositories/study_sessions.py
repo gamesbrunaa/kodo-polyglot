@@ -1,5 +1,6 @@
+from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String
+
 from app.core.database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean
 
 
 class StudySession(Base):

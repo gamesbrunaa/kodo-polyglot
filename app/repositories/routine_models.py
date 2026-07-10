@@ -1,5 +1,6 @@
+from sqlalchemy import Column, ForeignKey, Integer, String
+
 from app.core.database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey
 
 
 class Routine(Base):
