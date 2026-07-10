@@ -1,0 +1,10 @@
+from app.core.database import Base
+from sqlalchemy import Column, Integer, String
+
+
+class Language(Base):
+    __tablename__ = "languages"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(255), nullable=False)
+    label = Column(String(255), nullable=False)
