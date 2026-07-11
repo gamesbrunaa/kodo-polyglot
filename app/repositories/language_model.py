@@ -8,4 +8,4 @@ class Language(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
-    label = Column(String(255), nullable=False)
+    level = Column(String(255), nullable=False)
