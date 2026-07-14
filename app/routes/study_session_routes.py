@@ -16,13 +16,13 @@ def get_db():
 
 
 @router.post("/studysessions", response_model=StudySessionResponse)
-def create_study_session(studySession: StudySessionCreate, db=Depends(get_db)):
+def create_study_session(study_session: StudySessionCreate, db=Depends(get_db)):
     new_study_session = StudySession(
-        routine_id=studySession.routine_id,
-        date=studySession.date,
-        material=studySession.material,
-        completed=studySession.completed,
-        summary=studySession.summary,
+        routine_id=study_session.routine_id,
+        date=study_session.date,
+        material=study_session.material,
+        completed=study_session.completed,
+        summary=study_session.summary,
     )
     db.add(new_study_session)
     db.commit()
