@@ -18,8 +18,8 @@ I study French and English daily and needed a way to organize my routine by skil
 - [x] Project structure (FastAPI template)
 - [x] Database models (Language, skill, routine, studySession)
 - [x] Database connection (SQLAlchemy + MySQL)
-- [ ] API endpoints (CRUD)
-- [ ] Data validation (Pydantic schemas)
+- [x] API endpoints (CRUD)
+- [x] Data validation (Pydantic schemas)
 - [ ] Business logic (services)
 - [ ] Unit tests
 
