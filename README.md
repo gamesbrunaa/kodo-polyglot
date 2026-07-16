@@ -20,7 +20,7 @@ I study French and English daily and needed a way to organize my routine by skil
 - [x] Database connection (SQLAlchemy + MySQL)
 - [x] API endpoints (CRUD)
 - [x] Data validation (Pydantic schemas)
-- [ ] Business logic (services)
+- [x] Business logic (services)
 - [ ] Unit tests
 
 **Planned for v2:** vocabulary tracker (word, translation, context), study streak, statistics.
