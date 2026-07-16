@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends
 
 from app.core.database import SessionLocal
-from app.repositories.skills_model import Skills
+from app.repositories.skills_repository import SkillRepository
 from app.schemas.skill_schemas import SkillCreate, SkillResponse
+from app.services.skills_services import SkillsService
 
 router = APIRouter()
 
@@ -17,31 +18,23 @@ def get_db():
 
 @router.post("/skills", response_model=SkillResponse)
 def create_skill(skill: SkillCreate, db=Depends(get_db)):
-    new_skill = Skills(name=skill.name)
-    db.add(new_skill)
-    db.commit()
-    db.refresh(new_skill)
-    return new_skill
+    service = SkillsService(SkillRepository(db))
+    return service.create(skill.name)
 
 
 @router.get("/skills", response_model=list[SkillResponse])
 def get_skills(db=Depends(get_db)):
-    skills = db.query(Skills).all()
-    return skills
+    service = SkillsService(SkillRepository(db))
+    return service.get_all()
 
 
 @router.delete("/skills/{skill_id}")
 def delete_skill(skill_id: int, db=Depends(get_db)):
-    skill = db.query(Skills).filter(Skills.id == skill_id).first()
-    db.delete(skill)
-    db.commit()
-    return True
+    service = SkillsService(SkillRepository(db))
+    return service.delete(skill_id)
 
 
 @router.put("/skills/{skill_id}", response_model=SkillResponse)
 def update_skill(skill_id: int, data: SkillCreate, db=Depends(get_db)):
-    skill = db.query(Skills).filter(Skills.id == skill_id).first()
-    skill.name = data.name
-    db.commit()
-    db.refresh(skill)
-    return skill
+    service = SkillsService(SkillRepository(db))
+    return service.update(skill_id, data.name)
