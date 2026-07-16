@@ -21,7 +21,7 @@ I study French and English daily and needed a way to organize my routine by skil
 - [x] API endpoints (CRUD)
 - [x] Data validation (Pydantic schemas)
 - [x] Business logic (services)
-- [ ] Unit tests
+- [x] Unit tests
 
 **Planned for v2:** vocabulary tracker (word, translation, context), study streak, statistics.
 
