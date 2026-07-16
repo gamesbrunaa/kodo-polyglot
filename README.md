@@ -14,7 +14,7 @@ I study French and English daily and needed a way to organize my routine by skil
 
 ## Current status
 
-** v1 - In Progress **
+**v1 - In Progress**
 - [x] Project structure (FastAPI template)
 - [x] Database models (Language, skill, routine, studySession)
 - [x] Database connection (SQLAlchemy + MySQL)
