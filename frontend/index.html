@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kōdo polyglot</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-logo">
+            <img src="assets/logo.png" alt="kōdo polyglot">
+        </div>
+        <div class="menu">
+            <div class="menu-item active" data-tab="routine">
+                <i class="ti ti-calendar"></i>
+                <span>Routine</span>
+            </div>
+            <div class="menu-item" data-tab="sessions">
+                <i class="ti ti-book"></i>
+                <span>Sessions</span>
+            </div>
+            <div class="menu-item" data-tab="languages">
+                <i class="ti ti-world"></i>
+                <span>Languages</span>
+            </div>
+            <div class="menu-item" data-tab="skills">
+                <i class="ti ti-target"></i>
+                <span>Skills</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-avatar">B</div>
+        </div>
+    </nav>
+
+    <main>
+
+        <section id="routine" class="tab-content active">
+            <div class="page-header">
+                <div class="day-navigation">
+                    <button class="btn-icon btn-nav" onclick="Routine.prevDay()">
+                        <i class="ti ti-chevron-left"></i>
+                    </button>
+                    <div class="day-info" onclick="document.getElementById('date-picker').showPicker()" style="cursor: pointer;">
+                        <h1 id="routine-day">Monday</h1>
+                        <p class="subtitle">
+                            <span id="routine-date">August 10, 2026</span>
+                            <i class="ti ti-calendar" style="font-size: 13px; margin-left: 4px; vertical-align: -1px; color: var(--green);"></i>
+                        </p>
+                        <input type="date" id="date-picker" onchange="Routine.goToDate(this.value)">
+                    </div>
+                    <button class="btn-icon btn-nav" onclick="Routine.nextDay()">
+                        <i class="ti ti-chevron-right"></i>
+                    </button>
+                    <span class="today-badge" id="today-badge" onclick="Routine.goToday()">Today</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="Routine.showManageModal()">
+                        <i class="ti ti-settings-2"></i> Manage routines
+                    </button>
+                    <button class="btn-primary" onclick="Routine.showAddSessionModal()">
+                        <i class="ti ti-plus"></i> New session
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="ti ti-book"></i></div>
+                    <div>
+                        <div class="stat-number" id="total-sessions">0</div>
+                        <div class="stat-label">Total sessions</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="ti ti-check"></i></div>
+                    <div>
+                        <div class="stat-number" id="completed-sessions">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="ti ti-flame"></i></div>
+                    <div>
+                        <div class="stat-number" id="streak-count">0</div>
+                        <div class="stat-label">Day streak</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="session-list" id="routine-sessions">
+            </div>
+        </section>
+
+        <section id="sessions" class="tab-content">
+            <div class="page-header">
+                <h1>Study sessions</h1>
+                <div class="filter-pills">
+                    <span class="pill active" data-filter="all">All</span>
+                    <span class="pill" data-filter="completed">Completed</span>
+                    <span class="pill" data-filter="pending">Pending</span>
+                </div>
+            </div>
+            <div class="session-list" id="all-sessions">
+            </div>
+        </section>
+
+        <section id="languages" class="tab-content">
+            <div class="page-header">
+                <h1>Languages</h1>
+                <button class="btn-primary" onclick="Languages.showAddModal()">
+                    <i class="ti ti-plus"></i> Add language
+                </button>
+            </div>
+            <div class="card-grid" id="languages-list">
+            </div>
+        </section>
+
+        <section id="skills" class="tab-content">
+            <div class="page-header">
+                <h1>Skills</h1>
+                <button class="btn-primary" onclick="Skills.showAddModal()">
+                    <i class="ti ti-plus"></i> Add skill
+                </button>
+            </div>
+            <div class="card-grid" id="skills-list">
+            </div>
+        </section>
+
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">Add</h2>
+                <button class="btn-icon" onclick="App.closeModal()"><i class="ti ti-x"></i></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/languages.js"></script>
+    <script src="js/skills.js"></script>
+    <script src="js/sessions.js"></script>
+    <script src="js/routine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

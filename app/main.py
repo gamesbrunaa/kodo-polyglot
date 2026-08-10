@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.database import Base, engine
 from app.routes.language_routes import router as language_router
@@ -14,3 +15,10 @@ app.include_router(language_router)
 app.include_router(skill_router)
 app.include_router(routine_router)
 app.include_router(study_session_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
