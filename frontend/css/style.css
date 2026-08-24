@@ -350,10 +350,7 @@ main {
 }
 
 .session-actions {
-    display: flex;
-    gap: 4px;
-    opacity: 0;
-    transition: opacity 0.2s;
+    opacity: 0.5;
 }
 
 .session-card:hover .session-actions {
@@ -466,7 +463,7 @@ main {
     display: flex;
     gap: 4px;
     opacity: 0;
-    transition: opacity 0.2s;
+    transition: opacity 0.5s;
 }
 
 .entity-card:hover .entity-card-actions {
