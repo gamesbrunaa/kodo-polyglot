@@ -68,9 +68,17 @@ const App = {
                 Sessions.render(pill.dataset.filter);
             });
         });
+    },
+
+    showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
     }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
     App.init();
 });
+

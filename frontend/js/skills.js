@@ -55,6 +55,7 @@ const Skills = {
         await api.createSkill(name);
         App.closeModal();
         Skills.render();
+        App.showToast("Skill created!");
     },
 
     edit(id, name) {
@@ -83,11 +84,13 @@ const Skills = {
         await api.updateSkill(id, name);
         App.closeModal();
         Skills.render();
+        App.showToast("Skill updated!")
     },
 
     async remove(id) {
         if (!confirm("Delete this skill?")) return;
         await api.deleteSkill(id);
         Skills.render();
+        App.showToast("Skill deleted!")
     }
 };

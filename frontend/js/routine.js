@@ -152,6 +152,7 @@ const Routine = {
         await api.createSession(routineId, date, material, false, null);
         App.closeModal();
         Routine.render();
+        App.showToast("Routine created!");
     },
 
     async showManageModal() {
@@ -250,11 +251,13 @@ const Routine = {
 
         await api.createRoutine(day, languageId, skillId);
         Routine.showManageModal();
+        App.showToast("Routine created!")
     },
 
     async removeRoutine(id) {
         if (!confirm("Delete this routine?")) return;
         await api.deleteRoutine(id);
         Routine.showManageModal();
+        App.showToast("Routine deleted!")
     }
 };
