@@ -350,10 +350,7 @@ main {
 }
 
 .session-actions {
-    display: flex;
-    gap: 4px;
-    opacity: 0;
-    transition: opacity 0.2s;
+    opacity: 0.5;
 }
 
 .session-card:hover .session-actions {
@@ -465,8 +462,8 @@ main {
     right: 14px;
     display: flex;
     gap: 4px;
-    opacity: 0;
-    transition: opacity 0.2s;
+    opacity: 0.5;
+    transition: opacity 0.8s;
 }
 
 .entity-card:hover .entity-card-actions {
@@ -779,4 +776,23 @@ main {
 
 .day-info:hover h1 {
     color: var(--green);
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 300;
+}
+
+.toast.show {
+    opacity: 1;
 }

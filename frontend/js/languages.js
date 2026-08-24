@@ -62,6 +62,7 @@ const Language = {
         await api.createLanguage(name, level);
         App.closeModal();
         Language.render();
+        App.showToast("Language created!");
     },
 
     edit(id, name, level) {
@@ -96,11 +97,13 @@ const Language = {
         await api.updateLanguage(id, name, level);
         App.closeModal();
         Language.render();
+        App.showToast("Language updated!")
     },
 
     async remove(id) {
         if (!confirm("Delete this language?")) return;
         await api.deleteLanguage(id);
         Language.render();
+        App.showToast("Language deleted!")
     }
 };

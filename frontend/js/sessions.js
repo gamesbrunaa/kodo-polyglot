@@ -122,6 +122,7 @@ const Sessions = {
         await api.updateSession(id, session.routine_id, session.date, session.material, completed, session.summary);
         this.render();
         Routine.render();
+        App.showToast("Session updated!")
     },
 
     editSession(id) {
@@ -159,6 +160,7 @@ const Sessions = {
 
         await api.updateSession(id, session.routine_id, session.date, material, session.completed, summary);
         App.closeModal();
+        App.showToast("Session updated!")
         this.render();
     },
 
@@ -167,5 +169,6 @@ const Sessions = {
         await api.deleteSession(id);
         this.render();
         Routine.render();
+        App.showToast("Session deleted!")
     }
 };
