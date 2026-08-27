@@ -102,6 +102,13 @@ const Sessions = {
                         <span class="tag skill">${skillName}</span>
                     </div>
                     ${summaryHtml}
+                    <div class="summary-expand" id="summary-${session.id}" style="display: none;">
+                        <textarea id="summary-text-${session.id}" placeholder="What did you learn? (optional)"></textarea>
+                        <div class="summary-actions">
+                            <button class="btn-secondary" onclick="Sessions.completeWithoutSummary(${session.id})">Skip</button>
+                            <button class="btn-primary" onclick="Sessions.completeWithSummary(${session.id})">Save</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="session-actions">
                     <button class="btn-icon" onclick="Sessions.editSession(${session.id})">
@@ -119,10 +126,35 @@ const Sessions = {
         const session = this.allSessions.find(s => s.id === id);
         if (!session) return;
 
-        await api.updateSession(id, session.routine_id, session.date, session.material, completed, session.summary);
+        if (completed) {
+            document.getElementById(`summary-${id}`).style.display = "block";
+        } else {
+            await api.updateSession(id, session.routine_id, session.date, session.material, false, null);
+            App.showToast("Session updated!");
+            this.render();
+            Routine.render();
+        }
+    },
+
+    async completeWithoutSummary(id) {
+        const session = this.allSessions.find(s => s.id === id);
+        if (!session) return;
+
+        await api.updateSession(id, session.routine_id, session.date, session.material, true, session.summary);
+        App.showToast("Session completed!");
         this.render();
         Routine.render();
-        App.showToast("Session updated!")
+    },
+
+    async completeWithSummary(id) {
+        const session = this.allSessions.find(s => s.id === id);
+        if (!session) return;
+
+        const summary = document.getElementById(`summary-text-${id}`).value.trim() || null;
+        await api.updateSession(id, session.routine_id, session.date, session.material, true, summary);
+        App.showToast("Session completed!");
+        this.render();
+        Routine.render();
     },
 
     editSession(id) {
