@@ -3,6 +3,8 @@ const Routine = {
     currentDate: new Date(),
 
     async render() {
+        const dateIS = this.currentDate.toISOString().split("T")[0];
+        await api.generateSessions(dateIS);
         await Sessions.loadData();
 
         const dayName = this.currentDate.toLocaleDateString("en-US", { weekday: "long" });
@@ -255,8 +257,13 @@ const Routine = {
         if (!day || !languageId || !skillId) return;
 
         await api.createRoutine(day, languageId, skillId);
+
+        const dateISO = this.currentDate.toISOString().split("T")[0];
+        await api.generateSessions(dateISO);
+        await Routine.render();
+
+        App.showToast("Routine created!");
         Routine.showManageModal();
-        App.showToast("Routine created!")
     },
 
     async editRoutine(id, currentDay, currentLangId, currentSkillId) {

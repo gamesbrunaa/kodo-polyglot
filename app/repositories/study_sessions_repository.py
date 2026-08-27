@@ -36,3 +36,8 @@ class StudySessionRepository:
         self.db.commit()
         self.db.refresh(study_session)
         return study_session
+
+    def get_by_routine_and_date(self, routine_id, date):
+        return (
+            self.db.query(StudySession).filter(StudySession.routine_id == routine_id, StudySession.date == date).first()
+        )

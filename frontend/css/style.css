@@ -827,3 +827,13 @@ main {
     justify-content: flex-end;
     margin-top: 8px;
 }
+
+.material-placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+    cursor: pointer;
+}
+
+.material-placeholder:hover {
+    color: var(--green);
+}

@@ -106,6 +106,13 @@ const api = {
         return response.json();
     },
 
+    async generateSessions(date) {
+        const response = await fetch(`${API_URL}/studysessions/generate/${date}`, {
+            method: "POST"
+        });
+        return response.json();
+    },
+
     async deleteSession(id) {
         await fetch(`${API_URL}/studysessions/${id}`, { method: "DELETE" });
     }
