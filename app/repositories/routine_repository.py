@@ -32,3 +32,6 @@ class RoutineRepository:
         self.db.commit()
         self.db.refresh(routine)
         return routine
+
+    def get_by_day(self, day_of_week):
+        return self.db.query(Routine).filter(Routine.day_of_week == day_of_week).all()

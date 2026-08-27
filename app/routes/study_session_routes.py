@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from app.core.database import SessionLocal
+from app.repositories.routine_repository import RoutineRepository
 from app.repositories.study_sessions_repository import StudySessionRepository
 from app.schemas.study_session_schemas import StudySessionCreate, StudySessionResponse
 from app.services.study_session_services import StudySessionService
@@ -44,3 +45,15 @@ def delete_study_sessions(study_session_id: int, db=Depends(get_db)):
 def update_study_session(study_session_id: int, data: StudySessionCreate, db=Depends(get_db)):
     service = StudySessionService(StudySessionRepository(db))
     return service.update(study_session_id, data.routine_id, data.date, data.material, data.completed, data.summary)
+
+
+@router.post("/studysessions/generate/{date_str}")
+def generate_sessions(date_str: str, db=Depends(get_db)):
+    from datetime import date as dt
+
+    target_date = dt.fromisoformat(date_str)
+    day_name = target_date.strftime("%A")
+
+    service = StudySessionService(StudySessionRepository(db), RoutineRepository(db))
+    created = service.generate_daily_sessions(day_name, target_date)
+    return {"generated": len(created), "day": day_name}

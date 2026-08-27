@@ -6,7 +6,6 @@ const App = {
         this.setupFilters();
 
         Routine.render();
-        Routine.renderRoutineList();
     },
 
     setupTabs() {
@@ -30,7 +29,6 @@ const App = {
         switch (tab) {
             case "routine":
                 Routine.render();
-                Routine.renderRoutineList();
                 break;
             case "sessions":
                 Sessions.render();

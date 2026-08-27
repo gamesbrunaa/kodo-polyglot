@@ -96,7 +96,9 @@ const Sessions = {
                     ${checkIcon}
                 </div>
                 <div class="session-info">
-                    <div class="session-material">${session.material}</div>
+                    <div class="session-material" ${!session.material ? `onclick="Sessions.editSession(${session.id})"` : ""}>
+                        ${session.material ? session.material : '<span class="material-placeholder">Click to add study material...</span>'}
+                    </div>
                     <div class="session-tags">
                         <span class="tag language">${langName}</span>
                         <span class="tag skill">${skillName}</span>
@@ -192,8 +194,9 @@ const Sessions = {
 
         await api.updateSession(id, session.routine_id, session.date, material, session.completed, summary);
         App.closeModal();
-        App.showToast("Session updated!")
-        this.render();
+        App.showToast("Session updated!");
+        await this.render();
+        await Routine.render();
     },
 
     async removeSession(id) {
