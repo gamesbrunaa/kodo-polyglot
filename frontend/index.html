@@ -101,10 +101,15 @@
         <section id="sessions" class="tab-content">
             <div class="page-header">
                 <h1>Study sessions</h1>
-                <div class="filter-pills">
-                    <span class="pill active" data-filter="all">All</span>
-                    <span class="pill" data-filter="completed">Completed</span>
-                    <span class="pill" data-filter="pending">Pending</span>
+                <div class="header-actions">
+                    <div class="filter-pills">
+                        <span class="pill active" data-filter="all">All</span>
+                        <span class="pill" data-filter="completed">Completed</span>
+                        <span class="pill" data-filter="pending">Pending</span>
+                    </div>
+                    <button class="btn-primary" onclick="Routine.showAddSessionModal()">
+                        <i class="ti ti-plus"></i> New session
+                    </button>
                 </div>
             </div>
             <div class="session-list" id="all-sessions">
