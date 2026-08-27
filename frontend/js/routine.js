@@ -207,9 +207,14 @@ const Routine = {
                                 <span class="tag language">${lang ? lang.name : "?"}</span>
                                 <span class="tag skill">${skill ? skill.name : "?"}</span>
                             </div>
-                            <button class="btn-icon" onclick="Routine.removeRoutine(${r.id})">
-                                <i class="ti ti-trash"></i>
-                            </button>
+                            <div style="display: flex; gap: 4px;">
+                                <button class="btn-icon" onclick="Routine.editRoutine(${r.id}, '${r.day_of_week}', ${r.language_id}, ${r.skill_id})">
+                                    <i class="ti ti-pencil"></i>
+                                </button>
+                                <button class="btn-icon" onclick="Routine.removeRoutine(${r.id})">
+                                    <i class="ti ti-trash"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                 }).join("");
@@ -252,6 +257,65 @@ const Routine = {
         await api.createRoutine(day, languageId, skillId);
         Routine.showManageModal();
         App.showToast("Routine created!")
+    },
+
+    async editRoutine(id, currentDay, currentLangId, currentSkillId) {
+        const languages = await api.getLanguages();
+        const skills = await api.getSkills();
+
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+        const dayOptions = days.map(d =>
+            `<option value="${d}" ${d === currentDay ? "selected" : ""}>${d}</option>`
+        ).join("");
+
+        const langOptions = languages.map(l =>
+            `<option value="${l.id}" ${l.id === currentLangId ? "selected" : ""}>${l.name}${l.level ? " (" + l.level + ")" : ""}</option>`
+        ).join("");
+
+        const skillOptions = skills.map(s =>
+            `<option value="${s.id}" ${s.id === currentSkillId ? "selected" : ""}>${s.name}</option>`
+        ).join("");
+
+        const title = document.getElementById("modal-title");
+        const body = document.getElementById("modal-body");
+        const modal = document.querySelector(".modal");
+        modal.classList.remove("modal-lg");
+
+        title.textContent = "Edit routine";
+        body.innerHTML = `
+            <div class="form-group">
+                <label>Day of week</label>
+                <select id="edit-routine-day">${dayOptions}</select>
+            </div>
+            <div class="form-group">
+                <label>Language</label>
+                <select id="edit-routine-language">${langOptions}</select>
+            </div>
+            <div class="form-group">
+                <label>Skill</label>
+                <select id="edit-routine-skill">${skillOptions}</select>
+            </div>
+            <div class="form-actions">
+                <button class="btn-secondary" onclick="App.closeModal(); Routine.showManageModal()">Cancel</button>
+                <button class="btn-primary" onclick="Routine.updateRoutine(${id})">Save</button>
+            </div>
+        `;
+
+        App.openModal();
+    },
+
+    async updateRoutine(id) {
+        const day = document.getElementById("edit-routine-day").value;
+        const languageId = parseInt(document.getElementById("edit-routine-language").value);
+        const skillId = parseInt(document.getElementById("edit-routine-skill").value);
+
+        if (!day || !languageId || !skillId) return;
+
+        await api.updateRoutine(id, day, languageId, skillId);
+        App.closeModal();
+        App.showToast("Routine updated!");
+        Routine.showManageModal();
     },
 
     async removeRoutine(id) {

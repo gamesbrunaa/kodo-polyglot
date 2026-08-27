@@ -70,6 +70,15 @@ const api = {
         return response.json();
     },
 
+    async updateRoutine(id, day_of_week, language_id, skill_id) {
+        const response = await fetch(`${API_URL}/routines/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ day_of_week, language_id, skill_id })
+        });
+        return response.json();
+    },
+
     async deleteRoutine(id) {
         await fetch(`${API_URL}/routines/${id}`, { method: "DELETE" });
     },
